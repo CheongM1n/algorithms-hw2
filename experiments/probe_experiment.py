@@ -2,6 +2,7 @@
 
     python3 experiments/probe_experiment.py           # 6단계: 분리 연결, 적재율 0.25 ~ 4
     python3 experiments/probe_experiment.py compare   # 과제: 분리 연결 vs 선형 탐사, 0.1 ~ 0.9
+                                                      #       (같은 키·같은 M, 5회 평균)
 
 테이블 크기 M = 4093 고정, max_load=None(늘리지 않음), 무작위 URL.
 - 분리 연결: 비교한 노드 수.   이론  성공 ≈ 1 + α/2,  실패 ≈ α
@@ -23,6 +24,7 @@ from svg_plot import line_chart  # noqa: E402
 M = 4093
 MISSES = 4000
 SEED = 2026
+TRIALS = 5  # 비교 실험은 키 집합을 5번 새로 뽑아 평균
 ALNUM = "abcdefghijklmnopqrstuvwxyz0123456789"
 
 
@@ -106,9 +108,12 @@ def compare():
     loads = [i / 10 for i in range(1, 10)]  # 0.1 ~ 0.9
     rows = []
     for a in loads:
-        keys, misses = make_keys(round(a * M), MISSES, rng)  # 두 방식에 같은 키
-        ch, cm = measure(HashTable, keys, misses)
-        lh, lm = measure(LinearProbingHashTable, keys, misses)
+        ch = cm = lh = lm = 0.0
+        for _ in range(TRIALS):
+            keys, misses = make_keys(round(a * M), MISSES, rng)  # 두 방식에 같은 키
+            h1, m1 = measure(HashTable, keys, misses)
+            h2, m2 = measure(LinearProbingHashTable, keys, misses)
+            ch, cm, lh, lm = ch + h1 / TRIALS, cm + m1 / TRIALS, lh + h2 / TRIALS, lm + m2 / TRIALS
         cth, ctm = chain_theory(a)
         lth, ltm = linear_theory(a)
         rows.append([a, len(keys), ch, cth, cm, ctm, lh, lth, lm, ltm])

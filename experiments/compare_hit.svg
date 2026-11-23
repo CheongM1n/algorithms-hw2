@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" font-family="sans-serif" font-size="12">
+<rect width="720" height="440" fill="white"/>
+<text x="300.0" y="28" text-anchor="middle" font-size="15" font-weight="bold">성공 탐색: 분리 연결 vs 선형 탐사 (M=4093)</text>
+<line x1="70" y1="380.0" x2="530" y2="380.0" stroke="#e5e5e5"/>
+<text x="62" y="384.0" text-anchor="end">0</text>
+<line x1="70" y1="314.0" x2="530" y2="314.0" stroke="#e5e5e5"/>
+<text x="62" y="318.0" text-anchor="end">2</text>
+<line x1="70" y1="248.0" x2="530" y2="248.0" stroke="#e5e5e5"/>
+<text x="62" y="252.0" text-anchor="end">4</text>
+<line x1="70" y1="182.0" x2="530" y2="182.0" stroke="#e5e5e5"/>
+<text x="62" y="186.0" text-anchor="end">6</text>
+<line x1="70" y1="116.0" x2="530" y2="116.0" stroke="#e5e5e5"/>
+<text x="62" y="120.0" text-anchor="end">8</text>
+<line x1="70" y1="50.0" x2="530" y2="50.0" stroke="#e5e5e5"/>
+<text x="62" y="54.0" text-anchor="end">10</text>
+<text x="70.0" y="398" text-anchor="middle">0</text>
+<text x="121.1" y="398" text-anchor="middle">0.1</text>
+<text x="172.2" y="398" text-anchor="middle">0.2</text>
+<text x="223.3" y="398" text-anchor="middle">0.3</text>
+<text x="274.4" y="398" text-anchor="middle">0.4</text>
+<text x="325.6" y="398" text-anchor="middle">0.5</text>
+<text x="376.7" y="398" text-anchor="middle">0.6</text>
+<text x="427.8" y="398" text-anchor="middle">0.7</text>
+<text x="478.9" y="398" text-anchor="middle">0.8</text>
+<text x="530.0" y="398" text-anchor="middle">0.9</text>
+<line x1="70" y1="380" x2="530" y2="380" stroke="#333"/>
+<line x1="70" y1="50" x2="70" y2="380" stroke="#333"/>
+<text x="300.0" y="425" text-anchor="middle">적재율 α</text>
+<text x="18" y="215.0" text-anchor="middle" transform="rotate(-90 18 215.0)">평균 비교(탐사) 횟수</text>
+<polyline points="121.1,345.2 172.2,343.6 223.3,341.9 274.4,340.5 325.6,339.0 376.7,337.4 427.8,335.5 478.9,333.8 530.0,332.2" fill="none" stroke="#2a6fdb" stroke-width="2"/>
+<circle cx="121.1" cy="345.2" r="3" fill="#2a6fdb"/>
+<circle cx="172.2" cy="343.6" r="3" fill="#2a6fdb"/>
+<circle cx="223.3" cy="341.9" r="3" fill="#2a6fdb"/>
+<circle cx="274.4" cy="340.5" r="3" fill="#2a6fdb"/>
+<circle cx="325.6" cy="339.0" r="3" fill="#2a6fdb"/>
+<circle cx="376.7" cy="337.4" r="3" fill="#2a6fdb"/>
+<circle cx="427.8" cy="335.5" r="3" fill="#2a6fdb"/>
+<circle cx="478.9" cy="333.8" r="3" fill="#2a6fdb"/>
+<circle cx="530.0" cy="332.2" r="3" fill="#2a6fdb"/>
+<line x1="545" y1="60" x2="573" y2="60" stroke="#2a6fdb" stroke-width="2"/>
+<text x="579" y="64">분리 연결 (측정)</text>
+<polyline points="121.1,345.4 172.2,343.7 223.3,342.1 274.4,340.4 325.6,338.8 376.7,337.1 427.8,335.4 478.9,333.8 530.0,332.1" fill="none" stroke="#2a6fdb" stroke-width="2" stroke-dasharray="6 4"/>
+<line x1="545" y1="82" x2="573" y2="82" stroke="#2a6fdb" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="579" y="86">분리 연결 이론</text>
+<polyline points="121.1,344.9 172.2,342.9 223.3,339.9 274.4,336.6 325.6,330.5 376.7,322.5 427.8,310.3 478.9,276.7 530.0,216.5" fill="none" stroke="#d9534f" stroke-width="2"/>
+<circle cx="121.1" cy="344.9" r="3" fill="#d9534f"/>
+<circle cx="172.2" cy="342.9" r="3" fill="#d9534f"/>
+<circle cx="223.3" cy="339.9" r="3" fill="#d9534f"/>
+<circle cx="274.4" cy="336.6" r="3" fill="#d9534f"/>
+<circle cx="325.6" cy="330.5" r="3" fill="#d9534f"/>
+<circle cx="376.7" cy="322.5" r="3" fill="#d9534f"/>
+<circle cx="427.8" cy="310.3" r="3" fill="#d9534f"/>
+<circle cx="478.9" cy="276.7" r="3" fill="#d9534f"/>
+<circle cx="530.0" cy="216.5" r="3" fill="#d9534f"/>
+<line x1="545" y1="104" x2="573" y2="104" stroke="#d9534f" stroke-width="2"/>
+<text x="579" y="108">선형 탐사 (측정)</text>
+<polyline points="121.1,345.2 172.2,342.9 223.3,339.9 274.4,336.0 325.6,330.5 376.7,322.2 427.8,308.5 478.9,281.0 530.0,198.5" fill="none" stroke="#d9534f" stroke-width="2" stroke-dasharray="6 4"/>
+<line x1="545" y1="126" x2="573" y2="126" stroke="#d9534f" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="579" y="130">선형 탐사 이론</text>
+</svg>
