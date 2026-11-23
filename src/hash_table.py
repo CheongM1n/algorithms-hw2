@@ -146,3 +146,7 @@ class HashTable:
         for chain in self.buckets():
             for kv in chain:
                 yield kv
+
+
+# 서버가 --table 옵션으로 고르는 목록: (이름, 클래스)
+TABLES = [("chaining", HashTable)]
