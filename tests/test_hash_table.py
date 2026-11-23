@@ -7,7 +7,7 @@ SRC = os.path.join(os.path.dirname(__file__), "..", "src")
 sys.path.insert(0, SRC)
 
 import hash_table  # noqa: E402
-from hash_table import HashTable, horner_hash  # noqa: E402
+from hash_table import HashTable, LinearProbingHashTable, horner_hash  # noqa: E402
 
 
 class TestHorner(unittest.TestCase):
@@ -148,6 +148,65 @@ class TestChainingHashTable(HashTableContract, unittest.TestCase):
         buckets = t.buckets()
         self.assertEqual(len(buckets), 11)
         self.assertEqual(buckets[0], [("aj", 1), ("au", 2)])  # 끝에 붙인다
+
+
+class TestLinearProbingHashTable(HashTableContract, unittest.TestCase):
+    def make(self, **kw):
+        return LinearProbingHashTable(**kw)
+
+    def test_max_load_must_be_below_one(self):
+        with self.assertRaises(ValueError):
+            LinearProbingHashTable(max_load=1)
+
+    def test_collision_moves_to_next_slot(self):
+        t = LinearProbingHashTable(capacity=11, max_load=None)
+        t.put("aj", 1)  # 해시 0
+        t.put("au", 2)  # 해시 0 → 1번 칸
+        slots = t.slots()
+        self.assertEqual(slots[0], ("aj", 1, 0))
+        self.assertEqual(slots[1], ("au", 2, 0))
+        self.assertEqual(t.find("au")[2], 2)
+
+    def test_wraparound(self):
+        t = LinearProbingHashTable(capacity=11, max_load=None)
+        for k in ("ai", "at", "bk"):  # 모두 M=11에서 해시 10
+            self.assertEqual(horner_hash(k, 11), 10)
+        t.put("ai", 1)  # 10번 칸
+        t.put("at", 2)  # 끝에서 처음으로 → 0번 칸
+        t.put("bk", 3)  # → 1번 칸
+        slots = t.slots()
+        self.assertEqual(slots[10][0], "ai")
+        self.assertEqual(slots[0][0], "at")
+        self.assertEqual(slots[1][0], "bk")
+        self.assertEqual(t.get("at"), 2)
+        self.assertEqual(t.get("bk"), 3)
+        self.assertEqual(t.find("bk")[2], 3)
+        # 해시 0인 키는 0, 1번이 차 있으므로 2번 칸
+        t.put("aj", 4)
+        self.assertEqual(t.slots()[2][0], "aj")
+
+    def test_full_table(self):
+        t = LinearProbingHashTable(capacity=4, max_load=None)
+        for k in ("a", "b", "c", "d"):
+            t.put(k, k.upper())
+        self.assertEqual(len(t), 4)
+        self.assertEqual(t.load_factor(), 1)
+        with self.assertRaises(OverflowError):
+            t.put("e", "E")
+        t.put("a", "AA")  # 있는 키는 꽉 차도 바꿀 수 있다
+        self.assertEqual(t.get("a"), "AA")
+        self.assertNotIn("e", t)  # 무한 루프 없이 끝나야 한다
+        with self.assertRaises(KeyError):
+            t.get("e")
+        self.assertEqual(t.find("e")[2], 4)  # 모든 칸을 한 번씩
+        for k in ("b", "c", "d"):
+            self.assertEqual(t.get(k), k.upper())
+
+    def test_grows_before_full(self):
+        t = LinearProbingHashTable(capacity=2)  # 기본 max_load 0.5
+        for i in range(100):
+            t.put(str(i), i)
+        self.assertLessEqual(t.load_factor(), 0.5)
 
 
 class TestForbidden(unittest.TestCase):

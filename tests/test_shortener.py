@@ -4,7 +4,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from hash_table import HashTable  # noqa: E402
+from hash_table import HashTable, LinearProbingHashTable  # noqa: E402
 from shortener import Shortener  # noqa: E402
 
 
@@ -83,6 +83,15 @@ class ShortenerContract:
 
 class TestShortenerChaining(ShortenerContract, unittest.TestCase):
     table_class = HashTable
+
+
+class TestShortenerLinear(ShortenerContract, unittest.TestCase):
+    table_class = LinearProbingHashTable
+
+
+class TestShortenerDefault(unittest.TestCase):
+    def test_default_is_chaining(self):
+        self.assertIs(Shortener().table_class, HashTable)
 
 
 if __name__ == "__main__":
