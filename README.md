@@ -50,3 +50,15 @@ docker compose exec lab bash
 ```
 
 **이후 모든 `docker compose` 명령은 이 폴더에서 칩니다.**
+
+## 이 저장소에서 만든 것
+
+| 하고 싶은 것 | 명령 |
+| --- | --- |
+| 서버 (분리 연결) | `make serve` |
+| 서버 (선형 탐사) | `make serve TABLE=linear` |
+| 6단계 실험 (분리 연결, 적재율 0.25~4) | `make experiment` → `experiments/results.*` |
+| 과제 비교 실험 (0.1~0.9) | `python3 experiments/probe_experiment.py compare` → `experiments/compare*` |
+
+- `src/hash_table.py`: `HashTable`(분리 연결), `LinearProbingHashTable`(선형 탐사), `horner_hash`
+- `src/shortener.py`: `Shortener(table_class=...)`로 테이블 종류를 고른다
