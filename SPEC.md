@@ -56,6 +56,8 @@
 - `POST /shorten`: 폼 값 `url` → 결과 페이지(단축 링크). 잘못된 URL이면 400과 안내 문구
 - `GET /<code>`: 있으면 `302` + `Location: 원래 URL`, 없으면 `404`
 - `GET /table`: 코드→URL 테이블의 버킷(체인)과 각 코드의 Horner 해시 계산 과정
+  - 선형 탐사일 때는 칸마다 코드와 원래 해시 위치, 몇 칸 밀렸는지를 보여 준다
+- 테이블 종류: `make serve`(분리 연결), `make serve TABLE=linear`(선형 탐사)
 
 ## 6. 경계 사례
 
